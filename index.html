@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HymnNaija — Every hymn. Every church. One place.</title>
+<meta name="description" content="Read your church's hymn collection on your phone. Fast search, offline access, and a distraction-free reader built for Nigerian congregations.">
+<meta name="theme-color" content="#1e2a52">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="HymnNaija">
+<meta name="mobile-web-app-capable" content="yes">
+<script>
+  /* Applied before paint to avoid a flash of the wrong theme. */
+  (function () {
+    try {
+      var pref = JSON.parse(localStorage.getItem("hymnnaija:theme") || '"system"');
+      if (pref === "light" || pref === "dark") document.documentElement.setAttribute("data-theme", pref);
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="home" class="has-tabbar">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app-shell">
+
+<nav class="tabbar" aria-label="Primary">
+  <a class="tabbar__item" data-tab="home" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 11.5L12 4l8 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10v9a1 1 0 001 1h4v-6h2v6h4a1 1 0 001-1v-9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+    Home
+  </a>
+  <a class="tabbar__item" data-tab="search" href="search.html">
+    <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    Search
+  </a>
+  <a class="tabbar__item" data-tab="favorites" href="favorites.html">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.6 2.3 4 6 4c2.1 0 3.7 1.1 4.6 2.7C11.3 8.1 12 8.1 12.7 6.7 13.6 5.1 15.2 4 17.3 4c3.7 0 5.6 3.6 4 7.2-2.5 4.7-10 9.3-10 9.3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+    Favorites
+  </a>
+  <a class="tabbar__item" data-tab="settings" href="settings.html">
+    <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M19.4 13.5a1.7 1.7 0 000-3l1.1-1.6-1.7-1.7-1.6 1.1a1.7 1.7 0 00-3 0L13.5 6h-3L9.8 7.8a1.7 1.7 0 00-3 0l-1.6-1.1-1.7 1.7 1.1 1.6a1.7 1.7 0 000 3l-1.1 1.6 1.7 1.7 1.6-1.1a1.7 1.7 0 003 0l.7 1.8h3l.7-1.8a1.7 1.7 0 003 0l1.6 1.1 1.7-1.7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    Settings
+  </a>
+</nav>
+
+<header class="topbar">
+  <span class="brand-mark"><img src="assets/icons/icon-72.png" alt="" width="30" height="30">HymnNaija</span>
+</header>
+
+<main id="main">
+  <section class="hero">
+    <h1 class="sr-only">HymnNaija — Nigerian church hymn books</h1>
+    <p class="hero__greeting">Welcome back 👋</p>
+    <p class="hero__subgreeting">Every hymn. Every church. One place.</p>
+
+    <div class="hero-card">
+      <span class="hero-card__label">📖 Hymn of the Day</span>
+      <p class="hero-card__verse" id="homeHymnOfDay">"O for a thousand tongues to sing my great Redeemer's praise."</p>
+    </div>
+
+    <form class="search-field" id="homeSearchForm" role="search">
+      <span class="search-field__icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </span>
+      <label class="sr-only" for="homeSearchInput">Search hymns by number, title or lyrics</label>
+      <input type="search" id="homeSearchInput" placeholder="Search by number, title or lyrics">
+    </form>
+
+    <a class="btn btn--primary btn--block" href="browse.html">Explore hymns</a>
+  </section>
+
+  <section aria-labelledby="denomHeading">
+    <div class="section-heading">
+      <h2 id="denomHeading">Denominations</h2>
+      <a class="btn--text" href="browse.html">See all</a>
+    </div>
+    <div class="denom-scroller" id="homeDenomScroller" aria-live="polite">
+      <div class="skeleton" style="width:148px;height:88px;flex-shrink:0"></div>
+      <div class="skeleton" style="width:148px;height:88px;flex-shrink:0"></div>
+      <div class="skeleton" style="width:148px;height:88px;flex-shrink:0"></div>
+    </div>
+  </section>
+
+  <section id="homeRecentsSection" aria-labelledby="recentsHeading" hidden>
+    <div class="section-heading">
+      <h2 id="recentsHeading">Recently viewed</h2>
+    </div>
+    <ul class="hymn-list" id="homeRecentsList" style="display:flex;flex-direction:column;gap:var(--sp-2);"></ul>
+  </section>
+</main>
+</div>
+
+<script src="js/app.bundle.js"></script>
+</body>
+</html>

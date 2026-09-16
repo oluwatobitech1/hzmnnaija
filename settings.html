@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Settings · HymnNaija</title>
+<meta name="description" content="Manage theme, language, text size and other HymnNaija preferences.">
+<meta name="theme-color" content="#1e2a52">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="HymnNaija">
+<meta name="mobile-web-app-capable" content="yes">
+<script>
+  (function () {
+    try {
+      var pref = JSON.parse(localStorage.getItem("hymnnaija:theme") || '"system"');
+      if (pref === "light" || pref === "dark") document.documentElement.setAttribute("data-theme", pref);
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="settings" class="has-tabbar">
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app-shell">
+
+<nav class="tabbar" aria-label="Primary">
+  <a class="tabbar__item" data-tab="home" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 11.5L12 4l8 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10v9a1 1 0 001 1h4v-6h2v6h4a1 1 0 001-1v-9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+    Home
+  </a>
+  <a class="tabbar__item" data-tab="search" href="search.html">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    Search
+  </a>
+  <a class="tabbar__item" data-tab="favorites" href="favorites.html">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.6 2.3 4 6 4c2.1 0 3.7 1.1 4.6 2.7C11.3 8.1 12 8.1 12.7 6.7 13.6 5.1 15.2 4 17.3 4c3.7 0 5.6 3.6 4 7.2-2.5 4.7-10 9.3-10 9.3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+    Favorites
+  </a>
+  <a class="tabbar__item" data-tab="settings" href="settings.html">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/><path d="M19.4 13.5a1.7 1.7 0 000-3l1.1-1.6-1.7-1.7-1.6 1.1a1.7 1.7 0 00-3 0L13.5 6h-3L9.8 7.8a1.7 1.7 0 00-3 0l-1.6-1.1-1.7 1.7 1.1 1.6a1.7 1.7 0 000 3l-1.1 1.6 1.7 1.7 1.6-1.1a1.7 1.7 0 003 0l.7 1.8h3l.7-1.8a1.7 1.7 0 003 0l1.6 1.1 1.7-1.7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+    Settings
+  </a>
+</nav>
+
+<header class="topbar">
+  <h1 class="topbar__title">Settings</h1>
+</header>
+
+<main id="main">
+
+  <section>
+    <h2 class="eyebrow-label" style="margin-bottom:var(--sp-2)">Appearance</h2>
+    <div class="settings-group">
+      <div class="settings-row">
+        <div>
+          <div class="settings-row__label">Theme</div>
+          <div class="settings-row__hint">Match device, or choose light/dark</div>
+        </div>
+        <div class="segmented" id="themeSegmented" role="group" aria-label="Theme">
+          <button type="button" data-value="system">System</button>
+          <button type="button" data-value="light">Light</button>
+          <button type="button" data-value="dark">Dark</button>
+        </div>
+      </div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-row__label">Language</div>
+          <div class="settings-row__hint">Used wherever a hymn book has a translation. Falls back to English if a book doesn't have your language yet.</div>
+        </div>
+        <div class="segmented" id="languageSegmented" role="group" aria-label="Language">
+          <button type="button" data-value="en">English</button>
+          <button type="button" data-value="yo">Yorùbá</button>
+        </div>
+      </div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-row__label">Hymn text size</div>
+          <div class="settings-row__hint">Applies in the hymn reader</div>
+        </div>
+        <div class="font-stepper" role="group" aria-label="Hymn text size">
+          <button type="button" id="settingsFontDec" aria-label="Decrease text size">A−</button>
+          <span id="settingsFontValue" style="min-width:3.2em;text-align:center;font-weight:600;font-size:var(--step--1)">100%</span>
+          <button type="button" id="settingsFontInc" aria-label="Increase text size">A+</button>
+        </div>
+      </div>
+      <div class="settings-row" id="wakeLockRow">
+        <div>
+          <div class="settings-row__label">Keep screen on while reading</div>
+          <div class="settings-row__hint">Useful when leading a hymn during service</div>
+        </div>
+        <button type="button" class="switch" id="wakeLockToggle" role="switch" aria-checked="true"></button>
+      </div>
+    </div>
+  </section>
+
+  <section id="installRow" hidden>
+    <h2 class="eyebrow-label" style="margin-bottom:var(--sp-2)">App</h2>
+    <div class="settings-group">
+      <div class="settings-row">
+        <div>
+          <div class="settings-row__label">Install HymnNaija</div>
+          <div class="settings-row__hint">Add to your home screen for one-tap, offline access</div>
+        </div>
+        <button type="button" class="btn btn--gold" id="installBtn">Install</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="eyebrow-label" style="margin-bottom:var(--sp-2)">Your data</h2>
+    <div class="settings-group">
+      <div class="settings-row">
+        <div>
+          <div class="settings-row__label">Clear recently viewed</div>
+          <div class="settings-row__hint">Favorites are kept</div>
+        </div>
+        <button type="button" class="btn btn--ghost" id="clearRecentsBtn">Clear</button>
+      </div>
+      <div class="settings-row">
+        <div>
+          <div class="settings-row__label">Reset app data</div>
+          <div class="settings-row__hint">Clears favorites, recents and preferences on this device</div>
+        </div>
+        <button type="button" class="btn btn--ghost" id="resetAppBtn">Reset</button>
+      </div>
+    </div>
+    <p class="eyebrow-label">All data stays on this device — HymnNaija has no account and no server.</p>
+  </section>
+
+  <section>
+    <h2 class="eyebrow-label" style="margin-bottom:var(--sp-2)">Feedback</h2>
+    <div class="settings-group">
+      <a class="settings-row" href="mailto:aoluwatobi928@gmail.com?subject=HymnNaija%20%E2%80%94%20Please%20add%20our%20church&body=Hi%2C%0A%0APlease%20add%20our%20church%20to%20HymnNaija.%0A%0AChurch%20name%3A%20%0AHymn%20book%20name%20(if%20known)%3A%20%0ALink%20or%20file%2C%20if%20you%20have%20one%3A%20%0A%0AThanks!">
+        <div>
+          <div class="settings-row__label">Request your church</div>
+          <div class="settings-row__hint">Don't see your church's hymn book? Let us know and we'll try to add it</div>
+        </div>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="settings-row" href="mailto:aoluwatobi928@gmail.com?subject=HymnNaija%20feedback">
+        <div>
+          <div class="settings-row__label">Send feedback</div>
+          <div class="settings-row__hint">Found a mistake, a broken button, or have an idea? Tell us</div>
+        </div>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="eyebrow-label" style="margin-bottom:var(--sp-2)">About</h2>
+    <div class="settings-group">
+      <a class="settings-row" href="about.html">
+        <div class="settings-row__label">About HymnNaija</div>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="settings-row" href="privacy.html">
+        <div class="settings-row__label">Privacy policy</div>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="settings-row" href="terms.html">
+        <div class="settings-row__label">Terms of use</div>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+    <p class="eyebrow-label">HymnNaija v1.0.0 · Made for Nigerian congregations</p>
+  </section>
+
+</main>
+</div>
+
+<script src="js/app.bundle.js"></script>
+</body>
+</html>

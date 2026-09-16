@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hymn · HymnNaija</title>
+<meta name="description" content="Read hymn lyrics with adjustable text size, favorites and offline access.">
+<meta name="theme-color" content="#1e2a52">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="HymnNaija">
+<meta name="mobile-web-app-capable" content="yes">
+<script>
+  (function () {
+    try {
+      var pref = JSON.parse(localStorage.getItem("hymnnaija:theme") || '"system"');
+      if (pref === "light" || pref === "dark") document.documentElement.setAttribute("data-theme", pref);
+      var scale = JSON.parse(localStorage.getItem("hymnnaija:readerFontScale") || "1");
+      document.documentElement.style.setProperty("--reader-scale", scale);
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="reader" class="reader-shell">
+<div class="app-shell">
+
+<header class="topbar reader-topbar">
+  <a class="topbar__back" href="javascript:history.back()" aria-label="Back">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+  <div class="topbar__title reader-topbar__ref">
+    <span class="reader-topbar__den" id="readerDenName">&nbsp;</span>
+    <span class="reader-topbar__num" id="readerHymnNum">&nbsp;</span>
+  </div>
+  <button type="button" class="topbar__icon-btn" id="readerLangBtn" hidden aria-label="Switch language">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h9M8 3v2m3.5 0c-.6 3-2 5.4-4 7.2m-1-3.2c1 1.9 2.6 3.3 4.4 4.2M4 20l4.5-11 4.5 11M6 16h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <button type="button" class="topbar__icon-btn" id="readerFavBtn" aria-pressed="false" aria-label="Add to favorites">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.6 2.3 4 6 4c2.1 0 3.7 1.1 4.6 2.7C11.3 8.1 12 8.1 12.7 6.7 13.6 5.1 15.2 4 17.3 4c3.7 0 5.6 3.6 4 7.2-2.5 4.7-10 9.3-10 9.3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+  </button>
+  <button type="button" class="topbar__icon-btn" id="readerMoreBtn" aria-label="More options">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg>
+  </button>
+</header>
+
+<main id="readerMain">
+  <div class="hymn-heading" id="hymnHeading"></div>
+  <div class="hymn-body" id="hymnBody"></div>
+  <p class="hymn-source-note" id="hymnSourceNote"></p>
+</main>
+
+<div class="reader-bar">
+  <button type="button" class="reader-bar__nav reader-bar__nav--prev" id="readerPrevBtn" disabled>
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Previous
+  </button>
+  <div class="font-stepper" role="group" aria-label="Text size">
+    <button type="button" id="fontDecBtn" aria-label="Decrease text size">A−</button>
+    <button type="button" id="fontIncBtn" aria-label="Increase text size">A+</button>
+  </div>
+  <button type="button" class="reader-bar__nav reader-bar__nav--next" id="readerNextBtn" disabled>
+    Next
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+</div>
+</div>
+
+<div class="sheet-backdrop" id="readerSheetBackdrop"></div>
+<div class="sheet" id="readerSheet" role="dialog" aria-modal="true" aria-label="Hymn options">
+  <div class="sheet__handle"></div>
+  <button type="button" class="sheet__action" id="actionFavorite">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 20.5s-7.5-4.6-10-9.3C.4 7.6 2.3 4 6 4c2.1 0 3.7 1.1 4.6 2.7C11.3 8.1 12 8.1 12.7 6.7 13.6 5.1 15.2 4 17.3 4c3.7 0 5.6 3.6 4 7.2-2.5 4.7-10 9.3-10 9.3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+    Save to favorites
+  </button>
+  <button type="button" class="sheet__action" id="actionShare">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="18" cy="5" r="2.5" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="12" r="2.5" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="19" r="2.5" stroke="currentColor" stroke-width="2"/><path d="M8.2 10.8l7.6-4.6M8.2 13.2l7.6 4.6" stroke="currentColor" stroke-width="2"/></svg>
+    Share hymn
+  </button>
+  <button type="button" class="sheet__action" id="actionCopy">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2" stroke="currentColor" stroke-width="2"/><path d="M5 15H4a1 1 0 01-1-1V4a1 1 0 011-1h10a1 1 0 011 1v1" stroke="currentColor" stroke-width="2"/></svg>
+    Copy lyrics
+  </button>
+  <button type="button" class="sheet__action" data-close-sheet>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    Close
+  </button>
+</div>
+
+<script src="js/app.bundle.js"></script>
+</body>
+</html>

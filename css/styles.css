@@ -1,0 +1,1230 @@
+/* =========================================================================
+   HymnNaija — Design Tokens
+   Palette: deep navy base with a violet -> blue brand gradient and warm
+   gold accents (gilt hymnal edge), inspired by a modern dark gamified
+   mobile UI. One unified look regardless of the light/dark toggle.
+   Two families: Fraunces (display/hymn numbers) and Work Sans (UI + lyrics).
+   ========================================================================= */
+
+:root {
+  /* --- Brand palette --- */
+  --hn-navy-900: #070a15;
+  --hn-navy-800: #0a0e1c;
+  --hn-navy-700: #141a30;
+  --hn-navy-600: #1c2340;
+  --hn-navy-100: #eef0fb;
+
+  --hn-violet-600: #6c5ce7;
+  --hn-violet-500: #7c5cfc;
+  --hn-blue-500: #4f7cff;
+
+  --hn-gold-600: #d99a2b;
+  --hn-gold-500: #f5b94d;
+  --hn-gold-300: #ffd98a;
+
+  --hn-leaf-600: #2ed8a7;
+  --hn-rose-700: #ff6b81;
+
+  --hn-ink-900: #050710;
+  --hn-ink-500: #9aa1c2;
+
+  /* --- Semantic tokens (single unified dark theme) --- */
+  --bg: var(--hn-navy-800);
+  --bg-elevated: var(--hn-navy-700);
+  --bg-sunken: var(--hn-navy-900);
+  --surface-border: #262c4a;
+
+  --text-primary: #f5f6fb;
+  --text-secondary: var(--hn-ink-500);
+  --text-on-brand: #ffffff;
+
+  --brand: var(--hn-violet-600);
+  --brand-strong: #8b7cff;
+  --brand-gradient: linear-gradient(135deg, var(--hn-violet-500), var(--hn-blue-500));
+  --accent: var(--hn-gold-500);
+  --accent-strong: var(--hn-gold-300);
+  --favorite: var(--hn-rose-700);
+  --success: var(--hn-leaf-600);
+
+  --focus-ring: #8b7cff;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 14px 34px rgba(76, 60, 220, 0.28);
+  --shadow-glow: 0 10px 28px rgba(108, 92, 231, 0.45);
+
+  /* --- Type ---
+     No web fonts: the app must render identically online, offline and on
+     slow/expensive mobile data, so we lean on well-set system stacks
+     instead of a CDN font request. Distinctiveness comes from the scale,
+     weight and spacing choices below, not the typeface itself. */
+  --font-display: Georgia, "Iowan Old Style", "Palatino Linotype", "Book Antiqua", serif;
+  --font-body: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --step--1: clamp(0.8rem, 0.78rem + 0.12vw, 0.875rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --step-1: clamp(1.15rem, 1.08rem + 0.35vw, 1.3rem);
+  --step-2: clamp(1.4rem, 1.28rem + 0.6vw, 1.7rem);
+  --step-3: clamp(1.9rem, 1.6rem + 1.4vw, 2.6rem);
+  --step-4: clamp(2.4rem, 1.9rem + 2.4vw, 3.6rem);
+
+  /* Reader font scale, adjustable by user (multiplier applied via JS) */
+  --reader-scale: 1;
+
+  /* --- Spacing (4px base) --- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  --content-max: 640px;
+  --tap-min: 44px;
+
+  --dur-fast: 120ms;
+  --dur-med: 220ms;
+  --ease-standard: cubic-bezier(0.2, 0.7, 0.3, 1);
+
+  color-scheme: dark;
+}
+
+/* --- Explicit dark mode (kept identical: the app has one unified look) --- */
+[data-theme="dark"] {
+  --bg: var(--hn-navy-800);
+  --bg-elevated: var(--hn-navy-700);
+  --bg-sunken: var(--hn-navy-900);
+  --surface-border: #262c4a;
+
+  --text-primary: #f5f6fb;
+  --text-secondary: var(--hn-ink-500);
+  --text-on-brand: #ffffff;
+
+  --brand: var(--hn-violet-600);
+  --brand-strong: #8b7cff;
+  --accent: var(--hn-gold-500);
+  --accent-strong: var(--hn-gold-300);
+  --favorite: var(--hn-rose-700);
+  --success: var(--hn-leaf-600);
+
+  --focus-ring: #8b7cff;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 14px 34px rgba(76, 60, 220, 0.28);
+
+  color-scheme: dark;
+}
+
+/* Respect OS setting only when the user has not chosen explicitly.
+   theme.js sets data-theme as soon as it resolves a preference, so this
+   is purely the pre-JS / no-JS fallback. Same unified palette either way. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="light"]):not([data-theme="dark"]) {
+    --bg: var(--hn-navy-800);
+    --bg-elevated: var(--hn-navy-700);
+    --bg-sunken: var(--hn-navy-900);
+    --surface-border: #262c4a;
+    --text-primary: #f5f6fb;
+    --text-secondary: var(--hn-ink-500);
+    --text-on-brand: #ffffff;
+    --brand: var(--hn-violet-600);
+    --brand-strong: #8b7cff;
+    --accent: var(--hn-gold-500);
+    --accent-strong: var(--hn-gold-300);
+    --favorite: var(--hn-rose-700);
+    --success: var(--hn-leaf-600);
+    --focus-ring: #8b7cff;
+    color-scheme: dark;
+  }
+}
+/* =========================================================================
+   HymnNaija — Base
+   ========================================================================= */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color var(--dur-med) var(--ease-standard),
+              color var(--dur-med) var(--ease-standard);
+}
+
+img, svg { display: block; max-width: 100%; }
+
+h1, h2, h3, h4, p, figure { margin: 0; }
+
+a { color: inherit; text-decoration: none; }
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+ul, ol { margin: 0; padding: 0; list-style: none; }
+
+/* Headings use the display face; keep weights moderate rather than heavy */
+h1, h2, h3, .display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  color: var(--text-primary);
+}
+
+.eyebrow-label {
+  font-size: var(--step--1);
+  color: var(--text-secondary);
+}
+
+/* --- Accessibility: focus, motion, screen-reader utilities --- */
+
+:focus { outline: none; }
+
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--sp-3);
+  top: -60px;
+  background: var(--brand-strong);
+  color: var(--text-on-brand);
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--radius-sm);
+  z-index: 200;
+  transition: top var(--dur-fast) var(--ease-standard);
+}
+
+.skip-link:focus { top: var(--sp-3); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Selection color tuned to brand */
+::selection {
+  background: var(--accent-300, var(--hn-gold-300));
+  color: var(--hn-ink-900);
+}
+/* =========================================================================
+   HymnNaija — Components
+   ========================================================================= */
+
+/* --- Top app bar --- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--bg);
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.topbar__back,
+.topbar__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tap-min);
+  height: var(--tap-min);
+  border-radius: var(--radius-pill);
+  color: var(--text-primary);
+}
+
+.topbar__back:hover, .topbar__icon-btn:hover { background: var(--bg-sunken); }
+
+.topbar__title {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.brand-mark img { width: 30px; height: 30px; border-radius: 8px; }
+
+/* --- Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  min-height: var(--tap-min);
+  padding: var(--sp-3) var(--sp-5);
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  font-size: var(--step-0);
+  transition: background-color var(--dur-fast) var(--ease-standard),
+              transform var(--dur-fast) var(--ease-standard),
+              border-color var(--dur-fast) var(--ease-standard);
+}
+
+.btn:active { transform: scale(0.98); }
+
+.btn--primary {
+  background: var(--brand-gradient);
+  color: var(--text-on-brand);
+  box-shadow: var(--shadow-glow);
+  border: none;
+}
+.btn--primary:hover { filter: brightness(1.08); }
+.btn--primary:active { filter: brightness(0.96); }
+
+.btn--gold {
+  background: var(--accent);
+  color: var(--hn-ink-900);
+}
+.btn--gold:hover { background: var(--accent-strong); }
+
+.btn--ghost {
+  background: transparent;
+  border: 1.5px solid var(--surface-border);
+  color: var(--text-primary);
+}
+.btn--ghost:hover { background: var(--bg-sunken); }
+
+.btn--text {
+  color: var(--brand);
+  padding-inline: var(--sp-2);
+  min-height: auto;
+}
+
+.btn--block { width: 100%; }
+
+.btn--icon {
+  width: var(--tap-min);
+  height: var(--tap-min);
+  min-height: var(--tap-min);
+  padding: 0;
+  border-radius: var(--radius-pill);
+}
+
+.btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+
+/* --- Search field --- */
+.search-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-field__icon {
+  position: absolute;
+  left: var(--sp-4);
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+.search-field input[type="search"] {
+  width: 100%;
+  min-height: var(--tap-min);
+  padding: var(--sp-3) var(--sp-4) var(--sp-3) calc(var(--sp-4) * 2 + 14px);
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--surface-border);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font-size: var(--step-0);
+}
+
+.search-field input[type="search"]::-webkit-search-cancel-button { display: none; }
+
+.search-field__clear {
+  position: absolute;
+  right: var(--sp-2);
+  width: 32px; height: 32px;
+  border-radius: var(--radius-pill);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+.search-field__clear.is-visible { display: inline-flex; }
+.search-field__clear:hover { background: var(--bg-sunken); }
+
+/* --- Denomination chip / card --- */
+.denom-scroller {
+  display: flex;
+  gap: var(--sp-3);
+  overflow-x: auto;
+  padding: var(--sp-1) var(--sp-4) var(--sp-2);
+  margin: 0 calc(var(--sp-4) * -1);
+  scroll-snap-type: x proximity;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.denom-scroller::-webkit-scrollbar { display: none; }
+
+.denom-card {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  width: 148px;
+  padding: var(--sp-4);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--card-accent, var(--brand)) 32%, var(--bg-elevated)), var(--bg-elevated));
+  border: 1px solid color-mix(in srgb, var(--card-accent, var(--brand)) 45%, var(--surface-border));
+  border-left: none;
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--card-accent, var(--brand)) 18%, transparent);
+  transition: transform var(--dur-fast) var(--ease-standard), box-shadow var(--dur-fast) var(--ease-standard);
+}
+
+.denom-card:hover { box-shadow: 0 10px 26px color-mix(in srgb, var(--card-accent, var(--brand)) 28%, transparent); transform: translateY(-2px); }
+
+.denom-card__emblem {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--card-accent, var(--brand)) 24%, var(--bg-elevated));
+  color: var(--card-accent, var(--brand));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--sp-3);
+}
+.denom-card__emblem svg { width: 22px; height: 22px; }
+
+.denom-card__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-0);
+  margin-bottom: var(--sp-1);
+}
+
+.denom-card__meta {
+  font-size: var(--step--1);
+  color: var(--text-secondary);
+}
+
+.denom-card--soon {
+  opacity: 0.72;
+  filter: grayscale(0.35);
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.denom-card__soon-badge {
+  display: inline-block;
+  align-self: flex-start;
+  background: color-mix(in srgb, var(--text-secondary) 25%, transparent);
+  color: var(--text-secondary);
+  border-radius: var(--radius-pill);
+  padding: 2px 8px;
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.denom-card__request {
+  font-size: var(--step--1);
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.denom-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-3);
+}
+
+@media (min-width: 560px) {
+  .denom-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 900px) {
+  .denom-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* --- Hymn list row --- */
+.hymn-list { display: flex; flex-direction: column; }
+
+.hymn-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+  border-bottom: 1px solid var(--surface-border);
+  min-height: var(--tap-min);
+}
+
+.hymn-row:hover { background: var(--bg-sunken); }
+
+.hymn-row__number {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step-1);
+  color: var(--accent-strong);
+  min-width: 2.4em;
+  text-align: right;
+}
+
+.hymn-row__body { flex: 1; min-width: 0; }
+
+.hymn-row__title {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hymn-row__meta {
+  font-size: var(--step--1);
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hymn-row__fav {
+  width: 40px; height: 40px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+.hymn-row__fav:hover { background: var(--bg-sunken); }
+.hymn-row__fav[aria-pressed="true"] { color: var(--favorite); }
+
+/* --- Recently viewed card --- */
+.recent-card {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--bg-elevated);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+}
+
+/* --- Section heading --- */
+.section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--sp-3);
+}
+
+.section-heading h2 {
+  font-size: var(--step-1);
+}
+
+/* --- Empty / error state --- */
+.state-block {
+  text-align: center;
+  padding: var(--sp-8) var(--sp-5);
+  color: var(--text-secondary);
+}
+
+.state-block__icon {
+  width: 56px; height: 56px;
+  margin: 0 auto var(--sp-4);
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.state-block h3 {
+  font-size: var(--step-1);
+  color: var(--text-primary);
+  margin-bottom: var(--sp-2);
+}
+
+.state-block p { max-width: 32ch; margin: 0 auto; }
+
+.state-block .btn { margin-top: var(--sp-5); }
+
+/* --- Skeleton loading --- */
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-sunken) 25%, var(--surface-border) 37%, var(--bg-sunken) 63%);
+  background-size: 400% 100%;
+  animation: skeleton-wave 1.4s ease infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes skeleton-wave {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton { animation: none; background: var(--bg-sunken); }
+}
+
+.skeleton-row { display: flex; gap: var(--sp-4); padding: var(--sp-4); align-items: center; }
+.skeleton-row .skeleton:first-child { width: 2em; height: 1.4em; }
+.skeleton-row .skeleton:last-child { flex: 1; height: 1.4em; }
+
+/* --- Toast --- */
+.toast-region {
+  position: fixed;
+  left: 0; right: 0;
+  bottom: calc(var(--bottom-nav-h, 0px) + var(--sp-4));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+  pointer-events: none;
+  z-index: 300;
+}
+
+.toast {
+  pointer-events: auto;
+  background: var(--brand-strong);
+  color: var(--text-on-brand);
+  padding: var(--sp-3) var(--sp-5);
+  border-radius: var(--radius-pill);
+  font-size: var(--step--1);
+  box-shadow: var(--shadow-md);
+  animation: toast-in var(--dur-med) var(--ease-standard);
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Bottom tab bar --- */
+.tabbar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 40;
+  display: flex;
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--surface-border);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.tabbar__item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--sp-2) 0 var(--sp-1);
+  min-height: var(--tap-min);
+  color: var(--text-secondary);
+  font-size: 11px;
+}
+
+.tabbar__item svg { width: 22px; height: 22px; }
+
+.tabbar__item[aria-current="page"] {
+  color: var(--text-on-brand);
+  position: relative;
+}
+.tabbar__item[aria-current="page"] svg {
+  background: var(--brand-gradient);
+  border-radius: var(--radius-pill);
+  padding: 6px;
+  width: 34px;
+  height: 34px;
+  box-shadow: var(--shadow-glow);
+  margin-bottom: 1px;
+}
+[data-theme="dark"] .tabbar__item[aria-current="page"] { color: var(--text-on-brand); }
+
+/* --- Bottom sheet / modal --- */
+.sheet-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(18, 24, 43, 0.5);
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-med) var(--ease-standard);
+}
+.sheet-backdrop.is-open { opacity: 1; pointer-events: auto; }
+
+.sheet {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 101;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: var(--sp-3) var(--sp-5) calc(var(--sp-6) + env(safe-area-inset-bottom, 0));
+  transform: translateY(100%);
+  transition: transform var(--dur-med) var(--ease-standard);
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-md);
+}
+.sheet.is-open { transform: translateY(0); }
+
+.sheet__handle {
+  width: 40px; height: 4px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-border);
+  margin: var(--sp-2) auto var(--sp-4);
+}
+
+.sheet__action {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  width: 100%;
+  padding: var(--sp-4) var(--sp-2);
+  min-height: var(--tap-min);
+  border-bottom: 1px solid var(--surface-border);
+  text-align: left;
+}
+.sheet__action:last-child { border-bottom: none; }
+.sheet__action:hover { color: var(--brand); }
+
+/* --- Segmented control (theme / font size) --- */
+.segmented {
+  display: inline-flex;
+  background: var(--bg-sunken);
+  border-radius: var(--radius-pill);
+  padding: 3px;
+}
+
+.segmented button {
+  min-height: 36px;
+  padding: 0 var(--sp-4);
+  border-radius: var(--radius-pill);
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.segmented button[aria-pressed="true"] {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- Settings list --- */
+.settings-group {
+  background: var(--bg-elevated);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--sp-5);
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+  border-bottom: 1px solid var(--surface-border);
+  min-height: var(--tap-min);
+}
+.settings-row:last-child { border-bottom: none; }
+
+.settings-row__label { font-weight: 500; }
+.settings-row__hint { font-size: var(--step--1); color: var(--text-secondary); margin-top: 2px; }
+
+/* --- Toggle switch --- */
+.switch {
+  position: relative;
+  width: 46px; height: 26px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-border);
+  flex-shrink: 0;
+  transition: background-color var(--dur-fast) var(--ease-standard);
+}
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform var(--dur-fast) var(--ease-standard);
+}
+.switch[aria-checked="true"] { background: var(--brand); }
+.switch[aria-checked="true"]::after { transform: translateX(20px); }
+
+/* --- Badge --- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--sp-2);
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--bg-sunken);
+  color: var(--text-secondary);
+}
+/* =========================================================================
+   HymnNaija — Layout
+   ========================================================================= */
+
+.app-shell {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--sp-5) var(--sp-4) var(--sp-8);
+}
+
+.has-tabbar main { padding-bottom: calc(var(--bottom-nav-h, 64px) + var(--sp-6)); }
+
+/* --- Home hero --- */
+.hero {
+  padding: var(--sp-6) 0 var(--sp-5);
+}
+
+.hero__greeting {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: var(--step-2);
+  margin-bottom: 2px;
+}
+
+.hero__subgreeting {
+  color: var(--text-secondary);
+  margin-bottom: var(--sp-5);
+}
+
+.hero-card {
+  background: var(--brand-gradient);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-5);
+  color: var(--text-on-brand);
+  box-shadow: var(--shadow-glow);
+  margin-bottom: var(--sp-5);
+}
+
+.hero-card__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--step--1);
+  font-weight: 600;
+  opacity: 0.85;
+  margin-bottom: var(--sp-2);
+}
+
+.hero-card__verse {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  line-height: 1.4;
+}
+
+.hero__tagline {
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  line-height: 1.1;
+  max-width: 14ch;
+  margin-bottom: var(--sp-5);
+}
+
+.hero__tagline em {
+  font-style: normal;
+  color: var(--accent-strong);
+}
+
+.hero .search-field { margin-bottom: var(--sp-4); }
+
+section + section,
+.hero + section {
+  margin-top: var(--sp-7);
+}
+
+/* --- Denomination page header --- */
+.denom-header {
+  padding: var(--sp-2) 0 var(--sp-5);
+  border-bottom: 3px solid var(--card-accent, var(--brand));
+  margin-bottom: var(--sp-4);
+}
+
+.denom-header__emblem {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--card-accent, var(--brand)) 20%, var(--bg-elevated));
+  color: var(--card-accent, var(--brand));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--sp-3);
+}
+.denom-header__emblem svg { width: 26px; height: 26px; }
+
+.denom-header__book {
+  font-size: var(--step--1);
+  color: var(--text-secondary);
+}
+
+.denom-header__name {
+  font-size: var(--step-3);
+  margin: var(--sp-1) 0 var(--sp-3);
+}
+
+/* --- Favorites grouped list --- */
+.fav-group {
+  margin-bottom: var(--sp-6);
+}
+
+.fav-group__title {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  margin-bottom: var(--sp-2);
+  padding-left: var(--sp-1);
+  border-left: 4px solid var(--card-accent, var(--brand));
+}
+
+/* --- Search results page --- */
+.search-page .search-field { margin-bottom: var(--sp-2); }
+
+.search-filters {
+  display: flex;
+  gap: var(--sp-2);
+  overflow-x: auto;
+  padding: var(--sp-3) 0;
+  margin-bottom: var(--sp-2);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.search-filters::-webkit-scrollbar { display: none; }
+
+.filter-chip {
+  flex: 0 0 auto;
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--surface-border);
+  font-size: var(--step--1);
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.filter-chip[aria-pressed="true"] {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: var(--text-on-brand);
+}
+
+.search-result-count {
+  font-size: var(--step--1);
+  color: var(--text-secondary);
+  padding: var(--sp-2) 0;
+}
+
+mark {
+  background: var(--hn-gold-300);
+  color: var(--hn-ink-900);
+  border-radius: 3px;
+  padding: 0 1px;
+}
+[data-theme="dark"] mark { background: #6b5a2a; color: var(--text-primary); }
+
+/* --- Static content pages (about/privacy/terms) --- */
+.doc-page h2 { font-size: var(--step-2); margin: var(--sp-6) 0 var(--sp-3); }
+.doc-page p, .doc-page li { color: var(--text-secondary); margin-bottom: var(--sp-3); }
+.doc-page li { list-style: disc; margin-left: 1.2em; }
+
+/* --- Simple fade-in for route content (single orchestrated moment) --- */
+.route-enter {
+  animation: route-fade var(--dur-med) var(--ease-standard);
+}
+@keyframes route-fade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .route-enter { animation: none; }
+}
+/* =========================================================================
+   HymnNaija — Reader
+   ========================================================================= */
+
+.reader-shell { padding-bottom: 0; }
+.reader-shell main { padding-bottom: calc(var(--reader-bar-h, 72px) + var(--sp-6)); }
+
+.reader-topbar {
+  border-bottom: none;
+  background: var(--bg);
+}
+
+.reader-topbar__ref {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.15;
+}
+
+.reader-topbar__den {
+  font-size: 11px;
+  text-transform: none;
+  color: var(--text-secondary);
+}
+
+.reader-topbar__num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--step-0);
+}
+
+.hymn-heading {
+  text-align: left;
+  padding: var(--sp-2) 0 var(--sp-6);
+  border-bottom: 1px solid var(--surface-border);
+  margin-bottom: var(--sp-6);
+}
+
+.hymn-heading__number {
+  font-family: var(--font-display);
+  font-size: calc(var(--step-4) * var(--reader-scale, 1));
+  color: var(--accent-strong);
+  line-height: 1;
+  margin-bottom: var(--sp-2);
+}
+
+.hymn-heading__title {
+  font-size: calc(var(--step-3) * var(--reader-scale, 1));
+  line-height: 1.15;
+  margin-bottom: var(--sp-2);
+}
+
+.hymn-heading__meta {
+  color: var(--text-secondary);
+  font-size: calc(var(--step--1) * var(--reader-scale, 1));
+}
+
+.hymn-body {
+  font-family: var(--font-body);
+  font-size: calc(var(--step-1) * var(--reader-scale, 1));
+  line-height: 1.75;
+  max-width: 58ch;
+}
+
+.hymn-verse {
+  display: flex;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-6);
+}
+
+.hymn-verse__number {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--accent-strong);
+  min-width: 1.6em;
+}
+
+.hymn-verse__text {
+  white-space: pre-line;
+}
+
+.hymn-source-note {
+  margin-top: var(--sp-7);
+  padding-top: var(--sp-4);
+  border-top: 1px dashed var(--surface-border);
+  font-size: var(--step--1);
+  color: var(--text-secondary);
+}
+
+.hymn-source-note__badge {
+  display: inline-block;
+  background: color-mix(in srgb, var(--brand) 18%, transparent);
+  color: var(--accent-strong);
+  border-radius: var(--radius-pill);
+  padding: 2px 8px;
+  font-weight: 600;
+  font-size: 0.85em;
+  margin-right: 6px;
+}
+
+/* --- Sticky reader control bar --- */
+.reader-bar {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  padding-bottom: calc(var(--sp-3) + env(safe-area-inset-bottom, 0));
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--surface-border);
+}
+
+.reader-bar__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  min-height: var(--tap-min);
+  padding: 0 var(--sp-3);
+  border-radius: var(--radius-pill);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: var(--step--1);
+}
+.reader-bar__nav:hover { background: var(--bg-sunken); }
+.reader-bar__nav[disabled] { opacity: 0.35; }
+
+.reader-bar__nav--prev svg { transform: rotate(180deg); }
+
+.font-stepper {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--bg-sunken);
+  border-radius: var(--radius-pill);
+  padding: 3px;
+}
+
+.font-stepper button {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.font-stepper button:hover { background: var(--bg-elevated); }
+.font-stepper button[disabled] { opacity: 0.35; }
+
+/* Immersive mode: hide chrome, keep only lyrics, restore with a tap */
+.reader-shell.is-immersive .reader-topbar,
+.reader-shell.is-immersive .reader-bar { display: none; }
+.reader-shell.is-immersive main { padding-bottom: var(--sp-6); }
+/* =========================================================================
+   HymnNaija — Responsive
+   Mobile is the base experience (see base/components/layout). This file
+   adds breathing room and reflows chrome for tablet and desktop.
+   ========================================================================= */
+
+/* --- Tablet and up: bottom tab bar becomes a side rail is unnecessary here;
+   keep the tab bar (thumb reach still matters on large phones/tablets held
+   in portrait) but give content more width and padding. --- */
+@media (min-width: 720px) {
+  main { padding-left: var(--sp-6); padding-right: var(--sp-6); }
+
+  .hero__tagline { font-size: var(--step-4); }
+
+  .denom-card { width: 172px; }
+}
+
+/* --- Desktop: introduce a persistent left navigation rail instead of the
+   bottom tab bar, and widen the reading column slightly. --- */
+@media (min-width: 960px) {
+  .app-shell { flex-direction: row; }
+
+  .tabbar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    bottom: auto;
+    height: 100vh;
+    width: 88px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: var(--sp-5);
+    padding-top: var(--sp-6);
+    border-top: none;
+    border-right: 1px solid var(--surface-border);
+    flex-shrink: 0;
+  }
+
+  .tabbar__item { flex: none; width: 56px; }
+
+  main {
+    flex: 1;
+    max-width: 760px;
+    padding: var(--sp-7) var(--sp-7) var(--sp-8);
+  }
+
+  .has-tabbar main { padding-bottom: var(--sp-8); }
+
+  .topbar { max-width: none; }
+
+  .reader-bar { left: 88px; }
+
+  .toast-region { left: 88px; }
+
+  .denom-scroller { flex-wrap: wrap; overflow: visible; margin: 0; }
+  .denom-card { width: 200px; }
+}
+
+@media (min-width: 1200px) {
+  main { max-width: 860px; }
+  .hymn-body { max-width: 62ch; }
+}
+
+/* --- Small phones: tighten spacing slightly --- */
+@media (max-width: 360px) {
+  main { padding-left: var(--sp-3); padding-right: var(--sp-3); }
+  .hero__tagline { font-size: var(--step-2); }
+}
+
+/* --- Print: a clean readable hymn sheet --- */
+@media print {
+  .topbar, .tabbar, .reader-bar, .sheet, .sheet-backdrop, .toast-region { display: none !important; }
+  body { background: #fff; color: #000; }
+  .hymn-body { max-width: none; }
+}

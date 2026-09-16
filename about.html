@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>About · HymnNaija</title>
+<meta name="description" content="Learn about HymnNaija, a free hymn book app for Nigerian churches.">
+<meta name="theme-color" content="#1e2a52">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="HymnNaija">
+<meta name="mobile-web-app-capable" content="yes">
+<script>
+  (function () {
+    try {
+      var pref = JSON.parse(localStorage.getItem("hymnnaija:theme") || '"system"');
+      if (pref === "light" || pref === "dark") document.documentElement.setAttribute("data-theme", pref);
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="settings">
+<div class="app-shell">
+<header class="topbar">
+  <a class="topbar__back" href="settings.html" aria-label="Back to settings">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+  <h1 class="topbar__title">About HymnNaija</h1>
+</header>
+<main id="main" class="doc-page">
+  <p>HymnNaija is a simple, fast way to read your church's hymn collection on a phone — built for use during service, not just study at home.</p>
+
+  <h2>Why HymnNaija</h2>
+  <p>Many congregations in Nigeria still rely on printed hymn books that get lost, damaged or left at home. HymnNaija puts the same hymnal in your pocket, works without a strong internet connection once a hymn has been opened, and reads clearly whether you're in a bright church hall or a dim evening service.</p>
+
+  <h2>About the hymn content</h2>
+  <p>The hymn text currently shown in the app is clearly-marked sample/placeholder content used to build and test the reading experience. It is not real hymnal text, and it should not be treated as such. Real hymn collections will be added once they are confirmed to be in the public domain or properly licensed for each denomination.</p>
+
+  <h2>No account, no server</h2>
+  <p>HymnNaija has no login and no backend. Favorites, recently viewed hymns, your theme and your reading preferences are stored only in this browser, on this device.</p>
+</main>
+</div>
+<script src="js/app.bundle.js"></script>
+</body>
+</html>

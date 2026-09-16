@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Privacy policy · HymnNaija</title>
+<meta name="description" content="HymnNaija's privacy policy — what data is stored and how it's used.">
+<meta name="theme-color" content="#1e2a52">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="assets/icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="HymnNaija">
+<meta name="mobile-web-app-capable" content="yes">
+<script>
+  (function () {
+    try {
+      var pref = JSON.parse(localStorage.getItem("hymnnaija:theme") || '"system"');
+      if (pref === "light" || pref === "dark") document.documentElement.setAttribute("data-theme", pref);
+    } catch (e) {}
+  })();
+</script>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="settings">
+<div class="app-shell">
+<header class="topbar">
+  <a class="topbar__back" href="settings.html" aria-label="Back to settings">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+  <h1 class="topbar__title">Privacy policy</h1>
+</header>
+<main id="main" class="doc-page">
+  <p>HymnNaija is designed to work with as little data collection as possible.</p>
+
+  <h2>What is stored, and where</h2>
+  <ul>
+    <li>Favorites, recently viewed hymns, your theme choice and reading preferences (such as text size) are stored using your browser's localStorage, on your device only.</li>
+    <li>None of this information is sent to a server. HymnNaija has no backend and no database — there is nowhere for it to be sent.</li>
+    <li>Clearing your browser data, or using "Reset app data" in Settings, permanently removes this information.</li>
+  </ul>
+
+  <h2>Offline access</h2>
+  <p>To let the app work offline, your device's browser caches the app's files and the hymn data you've opened. This cache lives on your device and is managed by your browser.</p>
+
+  <h2>No accounts, no tracking, no ads</h2>
+  <p>HymnNaija does not require sign-in, does not use analytics or advertising trackers, and does not share information with third parties.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>If HymnNaija adds features that change how information is handled — for example, an optional way to sync favorites across devices — this page will be updated to describe it before that feature is turned on.</p>
+</main>
+</div>
+<script src="js/app.bundle.js"></script>
+</body>
+</html>
