@@ -13,7 +13,7 @@
  * cleaned up and clients pick up the new files.
  */
 
-const CACHE_VERSION = "v1";
+const CACHE_VERSION = "v2";
 const SHELL_CACHE = "hymnnaija-shell-" + CACHE_VERSION;
 const DATA_CACHE = "hymnnaija-data-" + CACHE_VERSION;
 
@@ -57,6 +57,7 @@ const DATA_URLS = [
   "data/ccc_en.json",
   "data/ccc_yo.json",
   "data/catholic_en.json",
+  "data/anglican_en.json",
 ];
 
 self.addEventListener("install", (event) => {
